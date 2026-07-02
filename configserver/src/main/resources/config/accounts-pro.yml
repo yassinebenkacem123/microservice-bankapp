@@ -1,0 +1,8 @@
+accounts:
+  message: "Welcome to the Accounts Production APIs!"
+  contactDetails:
+    name: "Yassine For Production"
+    email: "yassine.production@gmail.com"
+  onCallSupport:
+    - (+212) 123-456-7890
+    - (+212) 987-654-3210
