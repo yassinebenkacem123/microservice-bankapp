@@ -2,6 +2,7 @@ package com.bankApp.loansMicroservice.controllers;
 
 
 import com.bankApp.loansMicroservice.constants.LoansConstants;
+import com.bankApp.loansMicroservice.dtos.LoanContactInfoDTO;
 import com.bankApp.loansMicroservice.dtos.LoanDTO;
 import com.bankApp.loansMicroservice.dtos.ResponseDTO;
 import com.bankApp.loansMicroservice.services.LoanServices;
@@ -22,11 +23,16 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping("/api")
-@AllArgsConstructor
 @Validated
 public class LoanController {
 
-    private LoanServices loanServices;
+    private final  LoanServices loanServices;
+
+    public LoanController(LoanServices loanServices){
+        this.loanServices = loanServices;
+    }
+
+    private LoanContactInfoDTO loanContactInfoDTO;
 
     @PostMapping("/createLoan")
     public ResponseEntity<ResponseDTO> createLoan(
@@ -107,6 +113,13 @@ public class LoanController {
                             LoansConstants.MESSAGE_417
                     ));
         }
+    }
+
+
+    @GetMapping("/loan-info")
+    public  ResponseEntity<LoanContactInfoDTO> getLoanInfo(){
+        return ResponseEntity.ok()
+                .body(loanContactInfoDTO);
     }
 
 
