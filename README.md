@@ -6,6 +6,51 @@ A comprehensive banking microservices ecosystem built with Spring Boot and Sprin
 
 The project follows a distributed microservices architecture where each service is responsible for a specific business domain.
 
+```mermaid
+graph TD
+    User([User/Client]) --> Gateway[Gateway Server :8072]
+    
+    subgraph "Infrastructure"
+        Gateway --> Eureka[Eureka Server :8070]
+        Gateway --> Config[Config Server :8071]
+        Gateway --> Keycloak[Keycloak IAM]
+    end
+
+    subgraph "Core Business Services"
+        Gateway --> Accounts[Accounts Service :8080]
+        Gateway --> Cards[Cards Service :8090]
+        Gateway --> Loans[Loans Service :8091]
+        
+        Accounts -.->|Feign Client| Cards
+        Accounts -.->|Feign Client| Loans
+    end
+
+    subgraph "Event-Driven"
+        Accounts --> RabbitMQ{RabbitMQ}
+        Cards --> RabbitMQ
+        Loans --> RabbitMQ
+        RabbitMQ --> Message[Message Service]
+    end
+
+    subgraph "Observability Stack"
+        Accounts & Cards & Loans & Gateway --> Alloy[Grafana Alloy]
+        Alloy --> Prometheus[Prometheus]
+        Alloy --> Loki[Loki]
+        Alloy --> Tempo[Tempo]
+        Prometheus & Loki & Tempo --> Grafana[Grafana :3000]
+    end
+
+    classDef infrastructure fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef business fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef event fill:#dfd,stroke:#333,stroke-width:2px;
+    classDef observability fill:#ffd,stroke:#333,stroke-width:2px;
+
+    class Eureka,Config,Keycloak infrastructure;
+    class Accounts,Cards,Loans business;
+    class RabbitMQ,Message event;
+    class Alloy,Prometheus,Loki,Tempo,Grafana observability;
+```
+
 ### Core Services
 - **Accounts Microservice**: Manages customer account details. Orchestrates data from Cards and Loans services using OpenFeign to provide a consolidated view.
 - **Cards Microservice**: Handles credit/debit card management.
