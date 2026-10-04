@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loans-deployment
+  labels:
+    app: loans
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loans
+  template:
+    metadata:
+      labels:
+        app: loans
+    spec:
+      containers:
+        - name: loans
+          image: yassinandkingo/loans:latest
+          ports:
+            - containerPort: 8090
+          env:
+            - name: SPRING_APPLICATION_NAME
+              value: "loans"
+            - name: OTEL_SERVICE_NAME
+              value: "loans"
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: SPRING_PROFILES_ACTIVE
+            - name: SPRING_CONFIG_IMPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: SPRING_CONFIG_IMPORT
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: OTEL_EXPORTER_OTLP_ENDPOINT
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: SPRING_DATASOURCE_URL_LOANS
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loans
+spec:
+  selector:
+    app: loans
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 8090

@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+accounts:
+  message: "Welcome to the Accounts Related QA APIs!"
+  contactDetails:
+    name: "Yassine QA Dev"
+    email: "yassine.qa@gmail.com"
+  onCallSupport:
+    - (+212) 123-456-7890
+    - (+212) 987-654-3210

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bankapp-configmap
+data:
+  SPRING_PROFILES_ACTIVE: "default"
+  SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
+  SPRING_RABBITMQ_HOST: "rabbit"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "http://tempo:4317"
+  SPRING_DATASOURCE_URL_ACCOUNTS: "jdbc:mysql://accountsdb:3306/accountsdb"
+  SPRING_DATASOURCE_URL_CARDS: "jdbc:mysql://cardsdb:3306/cardsdb"
+  SPRING_DATASOURCE_URL_LOANS: "jdbc:mysql://loansdb:3306/loansdb"
+  KC_BOOTSTRAP_ADMIN_USERNAME: "admin"
+  KC_BOOTSTRAP_ADMIN_PASSWORD: "admin"
+  SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:7080/realms/master/protocol/openid-connect/certs"

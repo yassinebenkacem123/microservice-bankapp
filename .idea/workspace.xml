@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackgroundAgentGlobalSettings">
+    <option name="selectedModelId" value="gpt-5.5" />
+    <option name="selectedProviderName" value="OpenAI" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0778e9d9-33c1-40f3-adde-e4fc5b6d163c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_C:/Users/PC/Desktop/YASSINE/web developement/Microservices/brash-up" value="3HYn6R4jkmwj7xsh3FwQEMIKxHw" />
+    </persistenceIdMap>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;bf7272ff&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="3HYn6R4jkmwj7xsh3FwQEMIKxHw" />
+  <component name="ProjectSessionTemplates">
+    <option name="panelTemplate">
+      <template>
+        <option name="modeId" value="Ask" />
+        <option name="model">
+          <model>
+            <option name="modelProviderName" value="OpenAI" />
+            <option name="modelType" value="byok_family" />
+            <option name="modelValue" value="gpt-5.5" />
+          </model>
+        </option>
+        <option name="targetType" value="BACKGROUND" />
+      </template>
+    </option>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AccountsMicroserviceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ConfigserverApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.EurekaserverApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.GatewayserverApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.LoansMicroserviceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.MessageApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/Desktop/YASSINE/web developement/Microservices/brash-up&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+    <option name="configurationStatuses">
+      <map>
+        <entry key="SpringBootApplicationConfigurationType">
+          <value>
+            <map>
+              <entry key="AccountsMicroserviceApplication" value="STOPPED" />
+              <entry key="LoansMicroserviceApplication" value="STOPPED" />
+              <entry key="MessageApplication" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.AccountsMicroserviceApplication">
+    <configuration name="AccountsMicroserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="accountsMicroservice" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bankApp.accountsMicroservice.AccountsMicroserviceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoansMicroserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="loansMicroservice" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bankApp.loansMicroservice.LoansMicroserviceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MessageApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="message" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bankApp.message.MessageApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0778e9d9-33c1-40f3-adde-e4fc5b6d163c" name="Changes" comment="" />
+      <created>1786053697400</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1786053697400</updated>
+      <workItem from="1786053700082" duration="2348000" />
+      <workItem from="1786131003878" duration="11007000" />
+      <workItem from="1786211987580" duration="350000" />
+      <workItem from="1786212452978" duration="21000" />
+      <workItem from="1786213816445" duration="207000" />
+      <workItem from="1786392169119" duration="1339000" />
+      <workItem from="1786397182749" duration="1064000" />
+      <workItem from="1786651606595" duration="94000" />
+      <workItem from="1786651715544" duration="154000" />
+      <workItem from="1786651899918" duration="48000" />
+      <workItem from="1786651965129" duration="8000" />
+      <workItem from="1786651987059" duration="57000" />
+      <workItem from="1786652060505" duration="621000" />
+      <workItem from="1786654633033" duration="3037000" />
+      <workItem from="1787001786589" duration="32000" />
+      <workItem from="1787770246834" duration="1172000" />
+      <workItem from="1787998666584" duration="2247000" />
+      <workItem from="1790985275481" duration="295000" />
+      <workItem from="1791130873593" duration="1964000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

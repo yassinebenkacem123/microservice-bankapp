@@ -1,0 +1,8 @@
+loans:
+  message: "Welcome to the Loans Production!"
+  contactDetails:
+    name: "Yassine ben kacem"
+    email: "yassine@gmail.com"
+  onCallSupport:
+    - (+212) 123-456-7890
+    - (+212) 987-654-3210

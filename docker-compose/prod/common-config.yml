@@ -1,0 +1,49 @@
+services:
+  network-deploy-service:
+    networks:
+      - bank-network
+
+  microservice-base-config:
+    extends:
+      service: network-deploy-service
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    environment:
+      SPRING_PROFILES_ACTIVE: "prod"
+      SPRING_RABBITMQ_HOST: "rabbitmq"
+      SPRING_RABBITMQ_PORT: "5672"
+      SPRING_RABBITMQ_USERNAME: "guest"
+      SPRING_RABBITMQ_PASSWORD: "guest"
+      JAVA_TOOL_OPTIONS: "-javaagent:/app/libs/opentelemetry-javaagent-2.30.0.jar"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://tempo:4317"
+      OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+      OTEL_METRICS_EXPORTER: "none"
+      OTEL_LOGS_EXPORTER: "none"
+      OTEL_INSTRUMENTATION_SPRING_BOOT_ACTUATOR_AUTOCONFIGURE_ENABLED: "false"
+      OTEL_INSTRUMENTATION_SPRING_BOOT_ACTUATOR_ENABLED: "false"
+      OTEL_INSTRUMENTATION_LOGBACK_MDC_ENABLED: "true"
+      LOGGING_PATTERN_LEVEL: "%5p [$${spring.application.name:-unknown},%X{trace_id:-},%X{span_id:-}]"
+      LOGGING_LEVEL_COM_BANKAPP: "DEBUG"
+
+  microservice-configserver-config:
+    extends:
+      service: network-deploy-service
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    environment:
+      JAVA_TOOL_OPTIONS: "-javaagent:/app/libs/opentelemetry-javaagent-2.30.0.jar"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://tempo:4317"
+      OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+      OTEL_METRICS_EXPORTER: "none"
+      OTEL_LOGS_EXPORTER: "none"
+      OTEL_INSTRUMENTATION_SPRING_BOOT_ACTUATOR_AUTOCONFIGURE_ENABLED: "false"
+      OTEL_INSTRUMENTATION_SPRING_BOOT_ACTUATOR_ENABLED: "false"
+      OTEL_INSTRUMENTATION_LOGBACK_MDC_ENABLED: "true"
+      LOGGING_PATTERN_LEVEL: "%5p [$${spring.application.name:-unknown},%X{trace_id:-},%X{span_id:-}]"
+      LOGGING_LEVEL_COM_BANKAPP: "DEBUG"
+
+

@@ -1,0 +1,37 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: 'accounts'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['accounts-ms:8080']
+
+  - job_name: 'cards'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['cards-ms:9000']
+
+  - job_name: 'loans'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['loans-ms:8090']
+
+  - job_name: 'configserver'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['configserver-ms:8071']
+
+  - job_name: 'eurekaserver'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['eurekaserver-ms:8070']
+
+  - job_name: 'gatewayserver'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['gatewayserver-ms:8072']
+
+
+

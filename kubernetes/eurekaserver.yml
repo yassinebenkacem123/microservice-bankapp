@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eurekaserver-deployment
+  labels:
+    app: eurekaserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eurekaserver
+  template:
+    metadata:
+      labels:
+        app: eurekaserver
+    spec:
+      containers:
+        - name: eurekaserver
+          image: yassinandkingo/eurekaserver:latest
+          ports:
+            - containerPort: 8070
+          env:
+            - name: SPRING_APPLICATION_NAME
+              value: "eurekaserver"
+            - name: OTEL_SERVICE_NAME
+              value: "eurekaserver"
+            - name: SPRING_CONFIG_IMPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: SPRING_CONFIG_IMPORT
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: OTEL_EXPORTER_OTLP_ENDPOINT
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eurekaserver
+spec:
+  selector:
+    app: eurekaserver
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8070
+      targetPort: 8070

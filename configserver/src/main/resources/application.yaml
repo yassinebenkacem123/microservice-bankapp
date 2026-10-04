@@ -1,0 +1,64 @@
+server:
+  port: 8071
+
+spring:
+  application:
+    name: "ConfigServer"
+
+  profiles:
+    active: "git"
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/yassinebenkacem123/bank-configs.git"
+          default-label: "main"
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+          username: "yassinebenkacem123"
+          password: "${GITHUB_PAT}"
+    stream:
+      bindings:
+        springCloudBusInput:
+          group: "configserver"
+
+#  rabbitmq:
+#    host: localhost
+#    password: guest
+#    username: guest
+#    port: 5672
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  endpoint:
+    prometheus:
+      access: unrestricted
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+     enabled: true
+    readinessstate:
+      enabled: true
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+logging:
+  level:
+    com:
+      bankApp:
+        configserver: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id:-},%X{span_id:-}]"
+

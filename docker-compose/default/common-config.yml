@@ -1,0 +1,51 @@
+services:
+  network-deploy-service:
+    networks:
+      - bank-network
+
+  microservice-db-config:
+    image: mysql
+    extends:
+      service: network-deploy-service
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  microservice-base-config:
+    extends:
+      service: network-deploy-service
+    environment:
+      JAVA_TOOL_OPTIONS: "-javaagent:/app/libs/opentelemetry-javaagent-2.30.0.jar"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://tempo:4317"
+      OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+      OTEL_METRICS_EXPORTER: "none"
+      OTEL_LOGS_EXPORTER: "none"
+      OTEL_INSTRUMENTATION_SPRING_BOOT_ACTUATOR_AUTOCONFIGURE_ENABLED: "false"
+      OTEL_INSTRUMENTATION_SPRING_BOOT_ACTUATOR_ENABLED: "false"
+      OTEL_INSTRUMENTATION_LOGBACK_MDC_ENABLED: "true"
+      LOGGING_PATTERN_LEVEL: "%5p [$${spring.application.name:-unknown},%X{trace_id:-},%X{span_id:-}]"
+      LOGGING_LEVEL_COM_BANKAPP: "DEBUG"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+
+  microservice-config:
+    extends:
+      service: microservice-base-config
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: "default"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
+
+
+

@@ -1,0 +1,95 @@
+services:
+  rabbitmq:
+    image: "rabbitmq:3.12-management"
+    hostname: "rabbitmq"
+    container_name: "rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      service: network-deploy-service
+      file: common-config.yml
+
+  configserver:
+    image: "yassinandkingo/configserver:latest"
+    container_name: "configserver-ms"
+    ports:
+      - "8071:8071"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: "prod"
+      SPRING_RABBITMQ_HOST: "rabbitmq"
+      SPRING_RABBITMQ_PORT: "5672"
+      SPRING_RABBITMQ_USERNAME: "guest"
+      SPRING_RABBITMQ_PASSWORD: "guest"
+      SPRING_CLOUD_STREAM_BINDINGS_SPRINGCLOUDBUSINPUT_GROUP: "configserver"
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    extends:
+      service: microservice-configserver-config
+      file: common-config.yml
+
+  accounts:
+    image: "yassinandkingo/accounts:latest"
+    container_name: "accounts-ms"
+    ports:
+      - "8080:8080"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "accounts"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_CLOUD_STREAM_BINDINGS_SPRINGCLOUDBUSINPUT_GROUP: "accounts"
+    extends:
+      service: microservice-base-config
+      file: common-config.yml
+
+
+  cards:
+    image: "yassinandkingo/cards:latest"
+    container_name: "cards-ms"
+    ports:
+      - "9000:9000"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_CLOUD_STREAM_BINDINGS_SPRINGCLOUDBUSINPUT_GROUP: "cards"
+    extends:
+      service: microservice-base-config
+      file: common-config.yml
+
+  loans:
+    image: "yassinandkingo/loans:latest"
+    container_name: "loans-ms"
+    ports:
+      - "8090:8090"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_CLOUD_STREAM_BINDINGS_SPRINGCLOUDBUSINPUT_GROUP: "loans"
+    extends:
+      service: microservice-base-config
+      file: common-config.yml
+
+networks:
+  bank-network:
+    driver: bridge

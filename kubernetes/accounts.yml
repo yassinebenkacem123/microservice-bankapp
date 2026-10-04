@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts-deployment
+  labels:
+    app: accounts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: accounts
+  template:
+    metadata:
+      labels:
+        app: accounts
+    spec:
+      containers:
+        - name: accounts
+          image: yassinandkingo/accounts:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_APPLICATION_NAME
+              value: "accounts"
+            - name: OTEL_SERVICE_NAME
+              value: "accounts"
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: SPRING_PROFILES_ACTIVE
+            - name: SPRING_CONFIG_IMPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: SPRING_CONFIG_IMPORT
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+            - name: SPRING_RABBITMQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: SPRING_RABBITMQ_HOST
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: OTEL_EXPORTER_OTLP_ENDPOINT
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: bankapp-configmap
+                  key: SPRING_DATASOURCE_URL_ACCOUNTS
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: accounts
+spec:
+  selector:
+    app: accounts
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

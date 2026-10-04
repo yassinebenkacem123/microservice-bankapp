@@ -1,0 +1,86 @@
+spring:
+  application:
+    name: "gatewayserver"
+
+  data:
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 1s
+
+  config:
+    import: "optional:configserver:http://localhost:8071"
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+              lower-case-service-id: true
+          httpclient:
+            connect-timeout: 1000
+            response-timeout: 10s
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:7080/realms/master/protocol/openid-connect/certs"
+
+
+management:
+  endpoint:
+    gateway:
+      access: unrestricted
+
+    prometheus:
+      access: unrestricted
+
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  info:
+    env:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+info:
+  application:
+    name: "gatewayserver"
+    version: "1.0.0"
+    description: "Gateway Server for routing requests to microservices"
+
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id:-},%X{span_id:-}]"
+  level:
+    com:
+     bankApp:
+       gatewayserver: debug
+
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-size: 10
+        permitted-number-of-calls-in-half-open-state: 2
+        failure-rate-threshold: 50
+        wait-duration-in-open-state:
+          seconds: 1000
+
+
+# timout :
+
